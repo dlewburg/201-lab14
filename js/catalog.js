@@ -16,7 +16,7 @@ function populateForm() {
   for (let i in state.allProducts) { // is still an index counter
     let optionTag = document.createElement('option');
     optionTag.textContent = state.allProducts[i].name;
-    option.value = state.allProducts[i].name;
+    optionTag.value = state.allProducts[i].name;
     selectElement.appendChild(optionTag);
   }
 
@@ -34,15 +34,16 @@ function handleSubmit(event) {  //***Start Here
   state.cart.saveToLocalStorage();
   state.cart.updateCounter();
   updateCartPreview();
+  
 
 }
 
 // DONE: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
   // TODO: suss out the item picked from the select list
-  let item = document.getElementById.apply('items').value;
+  let item = document.getElementById('items').value;
   // TODO: get the quantity
-  let quantity = document.getElementById.apply('quantity').value;
+  let quantity = document.getElementById('quantity').value;
   // TODO: using those, add one item to the Cart
   state.cart.addItem(item, quantity); // ****STATE.CART IS THE CART ON THIS PAGE****
 }
@@ -51,7 +52,13 @@ function addSelectedItemToCart() {
 function updateCartPreview() {
   // TODO: Get the item and quantity from the form
   // TODO: Add a new element to the cartContents div with that information
-}
+  let updatedCart = document.getElementById('cartContents');
+  let quantity = document.getElementById('quantity').value;
+  let item = document.getElementById('items').value;
+  let cartTotal = document.createElement('p');
+  cartTotal.textContent = `You have ${item}: ${quantity}.`;
+  updatedCart.appendChild(cartTotal);
+};
 
 // Set up the "submit" event listener on the form.
 // This is the trigger for the app. When a user "submits" the form, it will
